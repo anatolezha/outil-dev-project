@@ -37,5 +37,14 @@ app.post('/', bodyParser.json(), (req, res) => {
   res.status(400).end();
 });
 
+app.delete('/:title', (req, res) => {
+  const index = data.findIndex(d => d.title === req.params.title);
+  if (index >= 0) {
+    data.splice(index, 1);
+    return res.status(204).end();
+  }
+  res.status(404).end();
+});
+
 app.listen(process.env.PORT, () => console.log('Listening...'));
 
